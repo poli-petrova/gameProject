@@ -1,6 +1,6 @@
 import weapons.Weapon;
 
-public class Defender extends Warrior {
+public class Defender extends Warrior  {
 
     private int DEFENSE = 2;
     private final int MAX_HEALTH = 60;
@@ -23,8 +23,9 @@ public class Defender extends Warrior {
     }
 
     @Override
-    protected void hitBy(Warrior attacker) {
-        setHealth(getHealth() - (Math.max(0, attacker.getAttack() - getDefense())));
+    public void hitBy(Damage damage) {
+        int attackerDamage = damage.getDamage();
+        setHealth(getHealth() - (Math.max(0, attackerDamage - getDefense())));
     }
 
     @Override
@@ -33,4 +34,6 @@ public class Defender extends Warrior {
         int additionalDefense = weapon.getDefense();
         setDEFENSE(getDefense() + additionalDefense);
     }
+
+
 }

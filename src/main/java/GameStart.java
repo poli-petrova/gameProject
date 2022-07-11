@@ -1,3 +1,4 @@
+
 import weapons.*;
 
 public class GameStart {
@@ -211,12 +212,6 @@ public class GameStart {
 //            System.out.println(w.getClass());
 //        }
 
-        var ogre = new Warrior();
-        var lancelot = new Knight();
-        var richard = new Defender();
-        var eric = new Vampire();
-        var freelancer = new Lancer();
-        var priest = new Healer();
 
 // you may consider using another interfaces for the predefined weapon
 // e.g. you could use enum or some factory
@@ -299,17 +294,7 @@ public class GameStart {
 //
 //        System.out.println(Battle.straightFight(myArmy, enemyArmy));
 
-        var army1 = new Army();
-        var amry2 = new Army();
 
-        army1.addUnits(Warrior::new, 2);
-        army1.addUnits(Knight::new, 1);
-
-        amry2.addUnits(Knight::new, 1);
-        amry2.addUnits(Healer::new, 1);
-        amry2.addUnits(Knight::new, 1);
-
-        System.out.println(Battle.straightFight(army1, amry2));
 
 
 

@@ -1,5 +1,3 @@
-import weapons.Weapon;
-
 public class Lancer extends Warrior {
 
     private static final int LANCER_ATTACK = 6;
@@ -29,6 +27,4 @@ public class Lancer extends Warrior {
             theSecondEnemy.setHealth(theSecondEnemy.getHealth() + (damageForSecondEnemy));
         }
     }
-
-
 }

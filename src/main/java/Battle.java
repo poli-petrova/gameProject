@@ -9,16 +9,16 @@ public class Battle {
                 secondWarrior.setHealth(0);
             } else {
                 firstWarrior.hits(secondWarrior);
-                if (firstWarrior.getBackLineWarrior() instanceof Healer) {
-                    Healer healer = (Healer) firstWarrior.getBackLineWarrior();
-                    healer.heal(firstWarrior);
+                if (secondWarrior.getBackLineWarrior() instanceof Healer) {
+                    Healer healer = (Healer) secondWarrior.getBackLineWarrior();
+                    healer.heal(secondWarrior);
                 }
                 if (secondWarrior.isAlive()) {
                     secondWarrior.hits(firstWarrior);
 
-                    if (secondWarrior.getBackLineWarrior() instanceof Healer) {
-                        Healer healer = (Healer) secondWarrior.getBackLineWarrior();
-                        healer.heal(secondWarrior);
+                    if (firstWarrior.getBackLineWarrior() instanceof Healer) {
+                        Healer healer = (Healer) firstWarrior.getBackLineWarrior();
+                        healer.heal(firstWarrior);
                     }
 
                 }
@@ -26,6 +26,8 @@ public class Battle {
         }
         return firstWarrior.isAlive();
     }
+
+
 
     public static boolean fight(Army army1, Army army2) {
         while (army1.armyHasAliveUnits() && army2.armyHasAliveUnits()) {
@@ -64,6 +66,5 @@ public class Battle {
         }
         return army1.armyHasAliveUnits();
     }
-
 
 }

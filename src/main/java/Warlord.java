@@ -15,8 +15,9 @@ public class Warlord extends Warrior {
     }
 
     @Override
-    protected void hitBy(Warrior attacker) {
-        setHealth(getHealth() - (Math.max(0, attacker.getAttack() - getDefense())));
+    public void hitBy(Damage damage) {
+        int attackerDamage = damage.getDamage();
+        setHealth(getHealth() - (Math.max(0, attackerDamage - getDefense())));
     }
 
     @Override

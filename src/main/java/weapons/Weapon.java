@@ -34,30 +34,30 @@ public class Weapon {
     //    public static Weapon getKatana() {
 //        return katanaBuilder.build();
 //    }
-
-    private static WeaponBuilder swordBuilder = builder().health(5).attack(2);
-
-    public static Weapon getSword() {
-        return swordBuilder.build();
-    }
-
-    private static WeaponBuilder greatAxeBuilder = builder().health(-15).attack(5).defense(-2).vampirism(+10);
-
-    public static Weapon getGreatAxe() {
-        return greatAxeBuilder.build();
-    }
-
-    private static WeaponBuilder magicWandBuilder = builder().health(30).attack(3).healPower(3);
-
-    public static Weapon getMagicWand() {
-        return magicWandBuilder.build();
-    }
-
-    private static WeaponBuilder shieldBuilder = builder().health(20).attack(-1).defense(2);
-
-    public static Weapon getShield() {
-        return shieldBuilder.build();
-    }
+//
+//    private static WeaponBuilder swordBuilder = builder().health(5).attack(2);
+//
+//    public static Weapon getSword() {
+//        return swordBuilder.build();
+//    }
+//
+//    private static WeaponBuilder greatAxeBuilder = builder().health(-15).attack(5).defense(-2).vampirism(+10);
+//
+//    public static Weapon getGreatAxe() {
+//        return greatAxeBuilder.build();
+//    }
+//
+//    private static WeaponBuilder magicWandBuilder = builder().health(30).attack(3).healPower(3);
+//
+//    public static Weapon getMagicWand() {
+//        return magicWandBuilder.build();
+//    }
+//
+//    private static WeaponBuilder shieldBuilder = builder().health(20).attack(-1).defense(2);
+//
+//    public static Weapon getShield() {
+//        return shieldBuilder.build();
+//    }
 
 
 }
