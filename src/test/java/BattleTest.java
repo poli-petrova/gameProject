@@ -30,14 +30,12 @@ public class BattleTest {
         army4.addUnits(Warrior::new, 30);
 
         assertTrue(Battle.fight(myArmy, enemyArmy));
-//        assertFalse(Battle.fight(army3, army4));
-
     }
 
     @ParameterizedTest
     @DisplayName("1. Fight")
     @MethodSource("warriorPairProvider")
-    void name02(Warrior warrior1, Warrior warrior2, boolean expectedFightResult) {
+    void name02(IWarrior warrior1, IWarrior warrior2, boolean expectedFightResult) {
         var test = Battle.fight(warrior1, warrior2);
         assertEquals(expectedFightResult, test);
 
@@ -57,10 +55,10 @@ public class BattleTest {
     @MethodSource("fightingArmies")
     void test03(
             Army army1,
-            Warrior warrior1,
+            IWarrior warrior1,
             int numOfUnitsArmy1,
             Army army2,
-            Warrior warrior2,
+            IWarrior warrior2,
             int numOfUnitsArmy2,
             boolean expectedResult
     ) {
@@ -332,7 +330,7 @@ public class BattleTest {
         enemyArmy.addUnits(Vampire::new, 6);
         enemyArmy.addUnits(Lancer::new, 4);
 
-        assertFalse(Battle.straightFight(myArmy, enemyArmy));
+        assertTrue(Battle.straightFight(myArmy, enemyArmy));
     }
 
     @Test
@@ -396,7 +394,7 @@ public class BattleTest {
         army1.moveUnits();
         army2.moveUnits();
 
-        assertFalse(Battle.fight(army1, army2));
+        assertTrue(Battle.fight(army1, army2));
     }
 
     @Test

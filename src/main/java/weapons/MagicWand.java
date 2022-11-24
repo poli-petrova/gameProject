@@ -11,6 +11,6 @@ public class MagicWand extends Weapon {
     @Builder(builderMethodName = "magicWandBuilder")
     public MagicWand() {
         super(30, 3);
-        healPower = getHealPower();
+        this.healPower = getHealPower();
     }
 }

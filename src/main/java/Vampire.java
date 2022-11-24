@@ -1,18 +1,17 @@
 import weapons.Weapon;
 
-public class Vampire extends Warrior {
-    private int ATTACK = 4;
+public class Vampire extends BaseWarrior {
+
     private  int VAMPIRISM = 50;
-    private final int MAX_HEALTH = 40;
 
     public Vampire() {
-        super(40, 4);
+        super(new WarriorImpl(40, 4));
     }
 
 
     @Override
     public int getMaxHealth() {
-        return MAX_HEALTH;
+        return 40;
     }
 
     public int getVampirism() {
@@ -20,12 +19,12 @@ public class Vampire extends Warrior {
     }
 
     @Override
-    public void hits(Warrior enemy) {
+    public void hits(IWarrior enemy) {
         int healthBefore = enemy.getHealth();
         super.hits(enemy);
         int damage = healthBefore - enemy.getHealth();
         int restoreHealth = damage * getVampirism() / 100;
-        setHealth((Math.min(40, getHealth() + restoreHealth)));
+        changeHealth((Math.min(40, getHealth() + restoreHealth)));
     }
 
     @Override

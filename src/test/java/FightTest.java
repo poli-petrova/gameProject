@@ -114,7 +114,7 @@ public class FightTest {
     @ParameterizedTest
     @DisplayName("1. Fight")
     @MethodSource("warriorPairProvider")
-    void name02(Warrior warrior1, Warrior warrior2, boolean expectedFightResult) {
+    void name02(IWarrior warrior1, IWarrior warrior2, boolean expectedFightResult) {
         var test = Battle.fight(warrior1, warrior2);
         assertEquals(expectedFightResult, test);
 

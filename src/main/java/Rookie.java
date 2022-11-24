@@ -1,9 +1,11 @@
-public class Rookie extends Warrior {
-
-    private final static int ROOKIE_ATTACK = 1;
+public class Rookie extends BaseWarrior {
 
     public Rookie() {
-        super(50, 1);
+        super(new WarriorImpl(50, 1));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 50;
+    }
 }

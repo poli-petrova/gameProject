@@ -9,14 +9,14 @@ import java.util.stream.IntStream;
 
 public class Army {
 
-    List<Warrior> troops = new ArrayList<>();
+    List<IWarrior> troops = new ArrayList<>();
 
     public Army() {
     }
 
-    public void addUnits(Supplier<Warrior> factory, int quantity) {
+    public void addUnits(Supplier<IWarrior> factory, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            Warrior warrior = factory.get();
+            IWarrior warrior = factory.get();
             if (!troops.isEmpty()) {
                 troops.get(troops.size() - 1).setBackLineWarrior(warrior);
             }
@@ -30,11 +30,11 @@ public class Army {
         }
     }
 
-    public boolean isWarlord(Warrior warrior) {
+    public boolean isWarlord(IWarrior warrior) {
         return warrior.getClass().equals(Warlord.class);
     }
 
-    public List<Warrior> getTroops() {
+    public List<IWarrior> getTroops() {
         return troops;
     }
 
@@ -42,19 +42,19 @@ public class Army {
         return !troops.isEmpty();
     }
 
-    public Iterator<Warrior> firstAliveIterator() {
+    public Iterator<IWarrior> firstAliveIterator() {
         return new FirstAliveIterator();
     }
 
     public void equipWarriorAtPosition(int position, Weapon weapon) {
-        Warrior toBeEquipped = troops.get(position);
+        IWarrior toBeEquipped = troops.get(position);
         if (toBeEquipped != null) {
             toBeEquipped.equipWeapon(weapon);
         }
     }
 
 
-    public  class FirstAliveIterator implements Iterator<Warrior> {
+    public  class FirstAliveIterator implements Iterator<IWarrior> {
         int cursor = 0;
 
         @Override
@@ -66,7 +66,7 @@ public class Army {
         }
 
         @Override
-        public Warrior next() {
+        public IWarrior next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
@@ -86,12 +86,12 @@ public class Army {
         if (army1.getTroops().size() != newSize) {
             army1.addUnits(Healer::new, newSize - army1.getTroops().size());
             for (int i = oldSizeArmy1; i < newSize; i++) {
-                army1.getTroops().get(i).setHealth(1);
+                army1.getTroops().get(i).changeHealth(1);
             }
         } else {
             army2.addUnits(Healer::new, newSize - army2.getTroops().size());
             for (int i = oldSizeArmy2; i < newSize; i++) {
-                army2.getTroops().get(i).setHealth(1);
+                army2.getTroops().get(i).changeHealth(1);
             }
         }
         army1.getTroops().forEach(warrior -> warrior.setBackLineWarrior(null));
@@ -104,15 +104,15 @@ public class Army {
     }
 
 
-    public boolean checkIfWarlordIsPresent(List<Warrior> troops) {
-        Optional<Warrior> warlord = troops
+    public boolean checkIfWarlordIsPresent(List<IWarrior> troops) {
+        Optional<IWarrior> warlord = troops
                 .stream()
                 .filter(warrior -> warrior.getClass().equals(Warlord.class))
                 .findAny();
         return warlord.isPresent();
     }
 
-    public void placeLancersInFront(List<Warrior> troops) {
+    public void placeLancersInFront(List<IWarrior> troops) {
         List<Integer> lancerIndexes = findLancers(troops);
         if (lancerIndexes != null) {
             for (int i = 0; i < lancerIndexes.size(); i++) {
@@ -125,9 +125,9 @@ public class Army {
         }
     }
 
-    public List<Integer> findLancers(List<Warrior> troops) {
+    public List<Integer> findLancers(List<IWarrior> troops) {
         List<Integer> lancerIndexes = new ArrayList<>();
-        for (Warrior w : getTroops()) {
+        for (IWarrior w : getTroops()) {
             if (w.getClass().equals(Lancer.class)) {
                 lancerIndexes.add(troops.indexOf(w));
             }
@@ -138,14 +138,14 @@ public class Army {
         return lancerIndexes;
     }
 
-    public boolean aliveSoldiers(List<Warrior> troops) {
+    public boolean aliveSoldiers(List<IWarrior> troops) {
         return troops.stream().anyMatch(warrior -> warrior.getHealth() > 0 && !warrior.getClass().equals(Healer.class));
     }
 
-    public  void placeAliveSoldiersInFront(List<Warrior> troops) {
+    public  void placeAliveSoldiersInFront(List<IWarrior> troops) {
         ArrayList<Integer> aliveSoldiers = new ArrayList<>();
         if (findLancers(troops) == null) {
-            for (Warrior w : getTroops()) {
+            for (IWarrior w : getTroops()) {
                 if (!w.getClass().equals(Healer.class) && w.isAlive()) {
                     aliveSoldiers.add(troops.indexOf(w));
                 }
@@ -160,10 +160,10 @@ public class Army {
         }
     }
 
-    public void placeHealersBehindFirstWarrior(List<Warrior> troops) {
+    public void placeHealersBehindFirstWarrior(List<IWarrior> troops) {
         if (troops.get(0).isAlive() && !troops.get(0).getClass().equals(Healer.class)) {
             List<Integer> lancerIndexes = new ArrayList<>();
-            for (Warrior w : getTroops()) {
+            for (IWarrior w : getTroops()) {
                 if (w.getClass().equals(Healer.class)) {
                     lancerIndexes.add(troops.indexOf(w));
                 }
@@ -194,8 +194,8 @@ public class Army {
         }
     }
 
-    public void placeWarlordInLastPosition(List<Warrior> troops) {
-        Warrior current = troops.stream().filter(warrior -> warrior.getClass().equals(Warlord.class))
+    public void placeWarlordInLastPosition(List<IWarrior> troops) {
+        IWarrior current = troops.stream().filter(warrior -> warrior.getClass().equals(Warlord.class))
                 .findFirst().get();
         int warlordIndex = troops.indexOf(current);
         troops.add(null);
@@ -204,7 +204,7 @@ public class Army {
         troops.remove(warlordIndex);
     }
 
-    public void rearrangeBackLineWarriors(List<Warrior> troops) {
+    public void rearrangeBackLineWarriors(List<IWarrior> troops) {
         for (int i = 0; i < troops.size() - 1; i++) {
             if (i == troops.size() - 1) {
                 troops.get(i).setBackLineWarrior(null);

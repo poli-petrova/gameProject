@@ -1,38 +1,9 @@
-
-
 public class Battle {
-
-    static boolean fight(Warrior firstWarrior, Warrior secondWarrior) {
-        while (firstWarrior.isAlive() && secondWarrior.isAlive()) {
-            if (firstWarrior instanceof Healer && secondWarrior instanceof Healer) {
-                firstWarrior.setHealth(0);
-                secondWarrior.setHealth(0);
-            } else {
-                firstWarrior.hits(secondWarrior);
-                if (secondWarrior.getBackLineWarrior() instanceof Healer) {
-                    Healer healer = (Healer) secondWarrior.getBackLineWarrior();
-                    healer.heal(secondWarrior);
-                }
-                if (secondWarrior.isAlive()) {
-                    secondWarrior.hits(firstWarrior);
-
-                    if (firstWarrior.getBackLineWarrior() instanceof Healer) {
-                        Healer healer = (Healer) firstWarrior.getBackLineWarrior();
-                        healer.heal(firstWarrior);
-                    }
-
-                }
-            }
-        }
-        return firstWarrior.isAlive();
-    }
-
-
 
     public static boolean fight(Army army1, Army army2) {
         while (army1.armyHasAliveUnits() && army2.armyHasAliveUnits()) {
-            Warrior warriorArmy1 = army1.troops.get(0);
-            Warrior warriorArmy2 = army2.troops.get(0);
+            IWarrior warriorArmy1 = army1.troops.get(0);
+            IWarrior warriorArmy2 = army2.troops.get(0);
             fight(warriorArmy1, warriorArmy2);
             if (warriorArmy1.isAlive()) {
                 army2.troops.remove(warriorArmy2);
@@ -67,4 +38,28 @@ public class Battle {
         return army1.armyHasAliveUnits();
     }
 
+    public static boolean fight(IWarrior firstWarrior, IWarrior secondWarrior) {
+        while (firstWarrior.isAlive() && secondWarrior.isAlive()) {
+            if (firstWarrior instanceof Healer && secondWarrior instanceof Healer) {
+                firstWarrior.changeHealth(0);
+                secondWarrior.changeHealth(0);
+            } else {
+                firstWarrior.hits(secondWarrior);
+                if (secondWarrior.getBackLineWarrior() instanceof Healer) {
+                    Healer healer = (Healer) secondWarrior.getBackLineWarrior();
+                    healer.heal(secondWarrior);
+                }
+                if (secondWarrior.isAlive()) {
+                    secondWarrior.hits(firstWarrior);
+
+                    if (firstWarrior.getBackLineWarrior() instanceof Healer) {
+                        Healer healer = (Healer) firstWarrior.getBackLineWarrior();
+                        healer.heal(firstWarrior);
+                    }
+
+                }
+            }
+        }
+        return firstWarrior.isAlive();
+    }
 }

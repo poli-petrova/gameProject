@@ -1,15 +1,13 @@
 import weapons.Weapon;
 
-public class Knight extends Warrior {
-
-    private static final int KNIGHT_ATTACK = 7;
+public class Knight extends BaseWarrior {
 
     public Knight() {
-        super(50, 7);
+        super(new WarriorImpl(50, 7));
     }
 
     @Override
-    public void equipWeapon(Weapon weapon) {
-        super.equipWeapon(weapon);
+    public int getMaxHealth() {
+        return 50;
     }
 }
